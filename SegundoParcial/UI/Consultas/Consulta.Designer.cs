@@ -37,7 +37,7 @@
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.textBoxCriterio = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxFiltrar = new System.Windows.Forms.ComboBox();
+            this.comboBoxFiltro = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConsulta)).BeginInit();
             this.SuspendLayout();
@@ -122,19 +122,19 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "Criterio";
             // 
-            // comboBoxFiltrar
+            // comboBoxFiltro
             // 
-            this.comboBoxFiltrar.FormattingEnabled = true;
-            this.comboBoxFiltrar.Items.AddRange(new object[] {
+            this.comboBoxFiltro.FormattingEnabled = true;
+            this.comboBoxFiltro.Items.AddRange(new object[] {
             "Id",
             "Descripcion",
             "Fecha de Compra",
             "Cantidad",
             "Precio"});
-            this.comboBoxFiltrar.Location = new System.Drawing.Point(44, 10);
-            this.comboBoxFiltrar.Name = "comboBoxFiltrar";
-            this.comboBoxFiltrar.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxFiltrar.TabIndex = 23;
+            this.comboBoxFiltro.Location = new System.Drawing.Point(44, 10);
+            this.comboBoxFiltro.Name = "comboBoxFiltro";
+            this.comboBoxFiltro.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFiltro.TabIndex = 23;
             // 
             // label1
             // 
@@ -159,7 +159,7 @@
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.textBoxCriterio);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBoxFiltrar);
+            this.Controls.Add(this.comboBoxFiltro);
             this.Controls.Add(this.label1);
             this.Name = "Consulta";
             this.Text = "Consulta";
@@ -180,7 +180,7 @@
         private System.Windows.Forms.Button buttonBuscar;
         private System.Windows.Forms.TextBox textBoxCriterio;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxFiltrar;
+        private System.Windows.Forms.ComboBox comboBoxFiltro;
         private System.Windows.Forms.Label label1;
     }
 }
