@@ -12,7 +12,7 @@ namespace SegundoParcial.Entidades
         [Key]
         public int VehiculoId { get; set; }
         public string Descripcion { get; set; }
-        public int Manteniento { get; set; }
+        public int TotalManteniento { get; set; }
 
         public Vehiculo() { }
 

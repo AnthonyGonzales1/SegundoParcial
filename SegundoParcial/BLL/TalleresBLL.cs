@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SegundoParcial.Entidades;
-using SegundoParcial.DAL;
-using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
-
+using System.Text;
+using SegundoParcial.DAL;
+using SegundoParcial.Entidades;
 
 namespace SegundoParcial.BLL
 {
-    public class VehiculoBLL
+    public class TalleresBLL
     {
-
-        /// <summary>
-        /// Permite guardar una entidad en la base de datos
-        /// </summary>
-        /// <param name="articulos">Una instancia de Articulos</param>
-        /// <returns>Retorna True si guardo o Falso si falló </returns>
-        public static bool Guardar(Vehiculo vehiculo)
+        public static bool Guardar(Taller taller)
         {
             bool paso = false;
             //Creamos una instancia del contexto para poder conectar con la BD
             Contexto contexto = new Contexto();
             try
             {
-                if (contexto.Vehiculos.Add(vehiculo) != null)
+                if (contexto.Tallers.Add(taller) != null)
                 {
                     contexto.SaveChanges();//Guardar los cambios
                     paso = true;
@@ -40,17 +32,14 @@ namespace SegundoParcial.BLL
             return paso;
         }
         /// <summary>
-        /// Permite Modificar una entidad en la base de datos 
-        /// </summary>
-        /// <param name="articulos">Una instancia de Articulos</param>
-        /// <returns>Retorna True si Modifico o Falso si falló </returns>
-        public static bool Modificar(Vehiculo vehiculo)
+        /// Permite Modificar una entidad en la base de datos
+        public static bool Modificar(Taller taller)
         {
             bool paso = false;
             Contexto contexto = new Contexto();
             try
             {
-                contexto.Entry(vehiculo).State = EntityState.Modified;
+                contexto.Entry(taller).State = EntityState.Modified;
                 if (contexto.SaveChanges() > 0)
                 {
                     paso = true;
@@ -66,18 +55,15 @@ namespace SegundoParcial.BLL
 
         /// <summary>
         /// Permite Eliminar una entidad en la base de datos
-        /// </summary>
-        ///<param name="id">El Id de la persona que se desea eliminar </param>
-        /// <returns>Retorna True si Eliminó o Falso si falló </returns>
         public static bool Eliminar(int id)
         {
             bool paso = false;
             Contexto contexto = new Contexto();
             try
             {
-                Vehiculo vehiculo = contexto.Vehiculos.Find(id);
+                Taller taller = contexto.Tallers.Find(id);
 
-                contexto.Vehiculos.Remove(vehiculo);
+                contexto.Tallers.Remove(taller);
 
                 if (contexto.SaveChanges() > 0)
                 {
@@ -94,45 +80,40 @@ namespace SegundoParcial.BLL
 
         /// <summary>
         /// Permite Buscar una entidad en la base de datos
-        /// </summary>
-        ///<param name="id">El Id de la persona que se desea encontrar </param>
-        /// <returns>Retorna la persona encontrada </returns>
-        public static Vehiculo Buscar(int id)
+        public static Taller Buscar(int id)
         {
             Contexto contexto = new Contexto();
-            Vehiculo vehiculo = new Vehiculo();
+            Taller taller = new Taller();
             try
             {
-                vehiculo = contexto.Vehiculos.Find(id);
+                taller = contexto.Tallers.Find(id);
                 contexto.Dispose();
             }
             catch (Exception)
             {
                 throw;
             }
-            return vehiculo;
+            return taller;
         }
 
         /// <summary>
         /// Permite extraer una lista de Personas de la base de datos
-        /// </summary> 
-        ///<param name="expression">Expression Lambda conteniendo los filtros de busqueda </param>
-        /// <returns>Retorna una lista de personas</returns>
-        public static List<Vehiculo> GetList(Expression<Func<Vehiculo, bool>> expression)
+        public static List<Taller> GetList(Expression<Func<Taller, bool>> expression)
         {
-            List<Vehiculo> vehiculo = new List<Vehiculo>();
+            List<Taller> taller = new List<Taller>();
             Contexto contexto = new Contexto();
             try
             {
-                vehiculo = contexto.Vehiculos.Where(expression).ToList();
+                taller = contexto.Tallers.Where(expression).ToList();
                 contexto.Dispose();
             }
             catch (Exception)
             {
                 throw;
             }
-            return vehiculo;
+            return taller ;
         }
 
     }
 }
+
