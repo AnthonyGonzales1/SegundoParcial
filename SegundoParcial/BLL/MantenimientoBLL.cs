@@ -15,12 +15,21 @@ namespace SegundoParcial.BLL
         public static bool Guardar(Mantenimiento mantenimiento)
         {
             bool paso = false;
-
+            Vehiculo vehiculo = new Vehiculo();
             Contexto contexto = new Contexto();
             try
             {
                 if (contexto.Mantenimientos.Add(mantenimiento) != null)
                 {
+
+                    foreach (var item in mantenimiento.Detalle)
+                    {
+                        contexto.Articulos.Find(item.ArticuloId).Inventario -= item.Cantidad;
+                    }
+
+
+                    contexto.Vehiculos.Find(mantenimiento.Detalle).TotalMantenimiento += Convert.ToInt32(mantenimiento.Total);
+
                     contexto.SaveChanges();
                     paso = true;
                 }
@@ -73,9 +82,23 @@ namespace SegundoParcial.BLL
 
             try
             {
-
                 Mantenimiento mantenimiento = contexto.Mantenimientos.Find(id);
-                contexto.Mantenimientos.Remove(mantenimiento);
+
+
+                if (mantenimiento != null)
+                {
+                    foreach (var item in mantenimiento.Detalle)
+                    {
+                        contexto.Articulos.Find(item.ArticuloId).Inventario += item.Cantidad;
+
+                    }
+
+                    contexto.Vehiculos.Find(mantenimiento.Detalle).TotalMantenimiento -= Convert.ToInt32(mantenimiento.Total);
+
+                    mantenimiento.Detalle.Count();
+                    contexto.Mantenimientos.Remove(mantenimiento);
+                    
+                }
                 if (contexto.SaveChanges() > 0)
                 {
 
@@ -107,7 +130,7 @@ namespace SegundoParcial.BLL
 
                 foreach (var item in mantenimiento.Detalle)
                 {
-                    string s = item.Vehiculo.Descripcion;
+                    //string s = item.;
                 }
                 contexto.Dispose();
             }
@@ -137,6 +160,20 @@ namespace SegundoParcial.BLL
             }
 
             return Mantenimientos;
+        }
+        public static decimal CalcularImporte(decimal precio, int cantidad)
+        {
+            return Convert.ToDecimal(precio) * Convert.ToInt32(cantidad);
+        }
+
+        public static decimal CalcularItbis(decimal subtotal)
+        {
+            return Convert.ToDecimal(subtotal) * Convert.ToDecimal(0.18);
+        }
+
+        public static decimal Total(decimal subtotal, decimal itbis)
+        {
+            return Convert.ToDecimal(subtotal) + Convert.ToDecimal(itbis);
         }
     }
 }

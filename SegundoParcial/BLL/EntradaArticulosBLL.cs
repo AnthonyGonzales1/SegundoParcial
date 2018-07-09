@@ -18,13 +18,24 @@ namespace SegundoParcial.BLL
         public static bool Guardar(EntradaArticulo entradaArticulo)
         {
             bool paso = false;
+            
             //Creamos una instancia del contexto para poder conectar con la BD
             Contexto contexto = new Contexto();
+            Repositorio<Articulo> articulo = new Repositorio<Articulo>(new Contexto());
+
             try
             {
+
                 if (contexto.EntradaArticulos.Add(entradaArticulo) != null)
                 {
-                    contexto.SaveChanges();//Guardar los cambios
+
+
+                    foreach (var item in articulo.GetList(x => x.Descripcion == entradaArticulo.Articulo))
+                    {
+                        contexto.Articulos.Find(item.ArticuloId).Inventario += entradaArticulo.Cantidad;
+                    }
+
+                    contexto.SaveChanges();
                     paso = true;
                 }
                 contexto.Dispose();//siempre hay que cerrar la conexion

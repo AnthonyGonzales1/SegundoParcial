@@ -12,14 +12,19 @@ namespace SegundoParcial.Entidades
         [Key]
         public int VehiculoId { get; set; }
         public string Descripcion { get; set; }
-        public int TotalManteniento { get; set; }
+        public int TotalMantenimiento { get; set; }
 
-        public Vehiculo() { }
+        public Vehiculo()
+        {
+            VehiculoId = 0;
+            Descripcion = string.Empty;
+            TotalMantenimiento = 0;
+        }
 
-        public override string ToString()
+        /*public override string ToString()
         {
             return this.Descripcion;
-        }
+        }*/
 
     }
 }

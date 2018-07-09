@@ -31,6 +31,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroArticuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroEntradaArticuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroMantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroTallerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroVehiculoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -57,9 +62,50 @@
             // 
             // registroToolStripMenuItem
             // 
+            this.registroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registroArticuloToolStripMenuItem,
+            this.registroEntradaArticuloToolStripMenuItem,
+            this.registroMantenimientoToolStripMenuItem,
+            this.registroTallerToolStripMenuItem,
+            this.registroVehiculoToolStripMenuItem});
             this.registroToolStripMenuItem.Name = "registroToolStripMenuItem";
             this.registroToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.registroToolStripMenuItem.Text = "Registro";
+            // 
+            // registroArticuloToolStripMenuItem
+            // 
+            this.registroArticuloToolStripMenuItem.Name = "registroArticuloToolStripMenuItem";
+            this.registroArticuloToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.registroArticuloToolStripMenuItem.Text = "Registro Articulo";
+            this.registroArticuloToolStripMenuItem.Click += new System.EventHandler(this.registroArticuloToolStripMenuItem_Click);
+            // 
+            // registroEntradaArticuloToolStripMenuItem
+            // 
+            this.registroEntradaArticuloToolStripMenuItem.Name = "registroEntradaArticuloToolStripMenuItem";
+            this.registroEntradaArticuloToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.registroEntradaArticuloToolStripMenuItem.Text = "Registro Entrada Articulo";
+            this.registroEntradaArticuloToolStripMenuItem.Click += new System.EventHandler(this.registroEntradaArticuloToolStripMenuItem_Click);
+            // 
+            // registroMantenimientoToolStripMenuItem
+            // 
+            this.registroMantenimientoToolStripMenuItem.Name = "registroMantenimientoToolStripMenuItem";
+            this.registroMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.registroMantenimientoToolStripMenuItem.Text = "Registro Mantenimiento";
+            this.registroMantenimientoToolStripMenuItem.Click += new System.EventHandler(this.registroMantenimientoToolStripMenuItem_Click);
+            // 
+            // registroTallerToolStripMenuItem
+            // 
+            this.registroTallerToolStripMenuItem.Name = "registroTallerToolStripMenuItem";
+            this.registroTallerToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.registroTallerToolStripMenuItem.Text = "Registro Taller";
+            this.registroTallerToolStripMenuItem.Click += new System.EventHandler(this.registroTallerToolStripMenuItem_Click);
+            // 
+            // registroVehiculoToolStripMenuItem
+            // 
+            this.registroVehiculoToolStripMenuItem.Name = "registroVehiculoToolStripMenuItem";
+            this.registroVehiculoToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.registroVehiculoToolStripMenuItem.Text = "Registro Vehiculo";
+            this.registroVehiculoToolStripMenuItem.Click += new System.EventHandler(this.registroVehiculoToolStripMenuItem_Click);
             // 
             // consultaToolStripMenuItem
             // 
@@ -96,5 +142,10 @@
         private System.Windows.Forms.ToolStripMenuItem registroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registroArticuloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registroEntradaArticuloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registroMantenimientoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registroTallerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registroVehiculoToolStripMenuItem;
     }
 }

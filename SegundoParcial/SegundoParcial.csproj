@@ -72,11 +72,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Consultas\Consulta.cs">
+    <Compile Include="UI\Consultas\ConsultaArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Consultas\Consulta.Designer.cs">
-      <DependentUpon>Consulta.cs</DependentUpon>
+    <Compile Include="UI\Consultas\ConsultaArticulo.Designer.cs">
+      <DependentUpon>ConsultaArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Consultas\ConsultaMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Consultas\ConsultaMantenimiento.Designer.cs">
+      <DependentUpon>ConsultaMantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Consultas\ConsultaVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Consultas\ConsultaVehiculo.Designer.cs">
+      <DependentUpon>ConsultaVehiculo.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Registros\RegistroArticulo.cs">
       <SubType>Form</SubType>
@@ -96,17 +108,17 @@
     <Compile Include="UI\Registros\RegistroTaller.Designer.cs">
       <DependentUpon>RegistroTaller.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Registros\RegistroVehiculo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Registros\RegistroVehiculo.Designer.cs">
-      <DependentUpon>RegistroVehiculo.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Registros\RegistroDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Registros\RegistroDetalle.Designer.cs">
       <DependentUpon>RegistroDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Registros\RegistroVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Registros\RegistroVehiculo.Designer.cs">
+      <DependentUpon>RegistroVehiculo.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -120,8 +132,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UI\Consultas\Consulta.resx">
-      <DependentUpon>Consulta.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Consultas\ConsultaArticulo.resx">
+      <DependentUpon>ConsultaArticulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Consultas\ConsultaMantenimiento.resx">
+      <DependentUpon>ConsultaMantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Consultas\ConsultaVehiculo.resx">
+      <DependentUpon>ConsultaVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Registros\RegistroArticulo.resx">
+      <DependentUpon>RegistroArticulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Registros\RegistroEntrada.resx">
       <DependentUpon>RegistroEntrada.cs</DependentUpon>
@@ -129,11 +150,11 @@
     <EmbeddedResource Include="UI\Registros\RegistroTaller.resx">
       <DependentUpon>RegistroTaller.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Registros\RegistroVehiculo.resx">
-      <DependentUpon>RegistroVehiculo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Registros\RegistroDetalle.resx">
       <DependentUpon>RegistroDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Registros\RegistroVehiculo.resx">
+      <DependentUpon>RegistroVehiculo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

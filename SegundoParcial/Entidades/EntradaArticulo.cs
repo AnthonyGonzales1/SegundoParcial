@@ -15,7 +15,7 @@ namespace SegundoParcial.Entidades
         public string Articulo { get; set; }
         public int Cantidad { get; set; }
 
-        public EntradaArticulo(int entradaId, DateTime fecha, srting articulo, int cantidad)
+        public EntradaArticulo(int entradaId, DateTime fecha, string articulo, int cantidad)
         {
             EntradaId = entradaId;
             Fecha = fecha;

@@ -13,7 +13,10 @@ namespace SegundoParcial.Entidades
         public string Nombre { get; set; }
 
         public Taller()
-        { }
+        {
+            TallerId = 0;
+            Nombre = string.Empty;
+        }
 
         public Taller(int tallerId, string nombre)
         {
