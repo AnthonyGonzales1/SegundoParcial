@@ -18,6 +18,7 @@ namespace SegundoParcial.UI.Registros
         {
             InitializeComponent();
             InventariotextBox.Text = "0";
+            
         }
 
         private void Buscarbutton_Click(object sender, EventArgs e)

@@ -44,9 +44,6 @@ namespace SegundoParcial.UI.Registros
             MantenimientoIdnumericUpDown.Value = 0;
             FechadateTimePicker.Value = DateTime.Now;
             ProxFechadateTimePicker.Value = DateTime.Now;
-            VehiculocomboBox.ToString();
-            ArticulocomboBox.ToString();
-            TallercomboBox.ToString();
             CantidadnumericUpDown.Value=0;
             PreciotextBox.Clear();
             ImportetextBox.Clear();

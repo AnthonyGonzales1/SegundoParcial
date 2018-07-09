@@ -74,8 +74,8 @@ namespace SegundoParcial.UI.Registros
         private void Nuevobutton_Click(object sender, EventArgs e)
         {
             VehiculoIdnumericUpDown.Value = 0;
-            DescripciontextBox.ToString();
-            TotalMantenimientotextBox.ToString();
+            DescripciontextBox.Clear();
+            TotalMantenimientotextBox.Clear();
 
         }
 

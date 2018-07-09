@@ -75,9 +75,8 @@ namespace SegundoParcial.UI.Registros
         private void Nuevobutton_Click(object sender, EventArgs e)
         {
             EntradaIdnumericUpDown.Value = 0;
-            FechadateTimePicker.ToString();
-            ArticulocomboBox.ToString();
-            CantidadtextBox.ToString();
+            FechadateTimePicker.Value = DateTime.Now;
+            CantidadtextBox.Clear();
         }
 
         private void LlenaComboBox()

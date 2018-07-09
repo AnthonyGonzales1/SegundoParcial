@@ -1,2 +1,2 @@
-Create Database DoparcialDb
+Create DataBase SegundoParcialDb
 Go
