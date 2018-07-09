@@ -174,24 +174,30 @@
             // CostonumericUpDown
             // 
             this.CostonumericUpDown.Location = new System.Drawing.Point(52, 116);
+            this.CostonumericUpDown.Maximum = new decimal(new int[] {
+            9000000,
+            0,
+            0,
+            0});
             this.CostonumericUpDown.Name = "CostonumericUpDown";
             this.CostonumericUpDown.Size = new System.Drawing.Size(114, 20);
             this.CostonumericUpDown.TabIndex = 17;
+            this.CostonumericUpDown.ValueChanged += new System.EventHandler(this.CostonumericUpDown_ValueChanged);
             // 
             // GananciatextBox
             // 
-            this.GananciatextBox.Location = new System.Drawing.Point(235, 115);
+            this.GananciatextBox.Location = new System.Drawing.Point(235, 116);
             this.GananciatextBox.Name = "GananciatextBox";
+            this.GananciatextBox.ReadOnly = true;
             this.GananciatextBox.Size = new System.Drawing.Size(107, 20);
             this.GananciatextBox.TabIndex = 19;
-            this.GananciatextBox.TextChanged += new System.EventHandler(this.GananciatextBox_TextChanged);
             // 
             // PreciotextBox
             // 
             this.PreciotextBox.Location = new System.Drawing.Point(52, 162);
             this.PreciotextBox.Name = "PreciotextBox";
             this.PreciotextBox.Size = new System.Drawing.Size(114, 20);
-            this.PreciotextBox.TabIndex = 20;
+            this.PreciotextBox.TabIndex = 18;
             this.PreciotextBox.TextChanged += new System.EventHandler(this.PreciotextBox_TextChanged);
             // 
             // RegistroArticulo
@@ -199,8 +205,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(354, 272);
-            this.Controls.Add(this.PreciotextBox);
             this.Controls.Add(this.GananciatextBox);
+            this.Controls.Add(this.PreciotextBox);
             this.Controls.Add(this.CostonumericUpDown);
             this.Controls.Add(this.ArticuloIdnumericUpDown);
             this.Controls.Add(this.InventariotextBox);

@@ -25,14 +25,14 @@ namespace SegundoParcial
 
         private void registroEntradaArticuloToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SegundoParcial.UI.Registros.RegistroDetalle registroDetalle = new UI.Registros.RegistroDetalle();
-            registroDetalle.Show();
+            SegundoParcial.UI.Registros.RegistroEntrada registroEntrada = new UI.Registros.RegistroEntrada();
+            registroEntrada.Show();
         }
 
         private void registroMantenimientoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SegundoParcial.UI.Registros.RegistroEntrada registroEntrada = new UI.Registros.RegistroEntrada();
-            registroEntrada.Show();
+            SegundoParcial.UI.Registros.RegistroDetalle registroDetalle = new UI.Registros.RegistroDetalle();
+            registroDetalle.Show();
         }
 
         private void registroTallerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,6 +45,32 @@ namespace SegundoParcial
         {
             SegundoParcial.UI.Registros.RegistroVehiculo registroVehiculo = new UI.Registros.RegistroVehiculo();
             registroVehiculo.Show();
+        }
+
+        private void consultaArticuloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SegundoParcial.UI.Consultas.ConsultaArticulo consultaArticulo = new UI.Consultas.ConsultaArticulo();
+            consultaArticulo.Show();
+        }
+
+        private void consultaMantenimientoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SegundoParcial.UI.Consultas.ConsultaMantenimiento consultaMantenimiento = new UI.Consultas.ConsultaMantenimiento();
+            consultaMantenimiento.Show();
+        }
+
+        private void consultaTallerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SegundoParcial.UI.Consultas.ConsultaTaller consultaTaller = new UI.Consultas.ConsultaTaller();
+            consultaTaller.Show();
+
+        }
+
+        private void consultaVehiculoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SegundoParcial.UI.Consultas.ConsultaVehiculo consultaVehiculo = new UI.Consultas.ConsultaVehiculo();
+            consultaVehiculo.Show();
+
         }
     }
 }

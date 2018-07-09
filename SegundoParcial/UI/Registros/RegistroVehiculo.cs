@@ -16,6 +16,7 @@ namespace SegundoParcial.UI.Registros
         public RegistroVehiculo()
         {
             InitializeComponent();
+            TotalMantenimientotextBox.Text = "0";
         }
         private void Buscarbutton_Click(object sender, EventArgs e)
         {
@@ -44,6 +45,7 @@ namespace SegundoParcial.UI.Registros
 
         private void Guardarbutton_Click(object sender, EventArgs e)
         {
+            
             bool paso = false;
             if (Validar(2))
             {
@@ -66,8 +68,7 @@ namespace SegundoParcial.UI.Registros
                 MessageBox.Show("Guardado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("No se pudo guardar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
+            
         }
 
         private void Nuevobutton_Click(object sender, EventArgs e)
@@ -98,12 +99,11 @@ namespace SegundoParcial.UI.Registros
         }
         private Vehiculo LlenarClase()
         {
-
             Vehiculo veh = new Vehiculo();
 
             veh.VehiculoId = Convert.ToInt32(VehiculoIdnumericUpDown.Value);
             veh.Descripcion = DescripciontextBox.Text;
-            veh.TotalMantenimiento = Convert.ToInt32(TotalMantenimientotextBox.Text);
+            veh.TotalMantenimiento = 0;
 
             return veh;
         }
@@ -123,13 +123,7 @@ namespace SegundoParcial.UI.Registros
                 errorProvider.SetError(DescripciontextBox, "Debe ingresar una Descripcion");
                 paso = true;
             }
-            if (validar == 2 && TotalMantenimientotextBox.Text == string.Empty)
-            {
-
-                errorProvider.SetError(TotalMantenimientotextBox, "No hay datos de Mantenimiento");
-                paso = true;
-            }
-
+            
             return paso;
         }
     }

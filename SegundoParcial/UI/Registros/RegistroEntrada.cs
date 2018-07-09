@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SegundoParcial.BLL;
+using SegundoParcial.DAL;
 using SegundoParcial.Entidades;
 
 namespace SegundoParcial.UI.Registros
@@ -16,6 +17,7 @@ namespace SegundoParcial.UI.Registros
         public RegistroEntrada()
         {
             InitializeComponent();
+            LlenaComboBox();
         }
 
         private void Buscarbutton_Click(object sender, EventArgs e)
@@ -33,7 +35,6 @@ namespace SegundoParcial.UI.Registros
 
             if (entradaArticulo != null)
             {
-
                 FechadateTimePicker.Text = entradaArticulo.Fecha.ToString();
                 ArticulocomboBox.Text = entradaArticulo.Articulo.ToString();
                 CantidadtextBox.Text = entradaArticulo.Cantidad.ToString();
@@ -79,6 +80,14 @@ namespace SegundoParcial.UI.Registros
             CantidadtextBox.ToString();
         }
 
+        private void LlenaComboBox()
+        {
+            Repositorio<Articulo> repositorio = new Repositorio<Articulo>(new Contexto());
+            ArticulocomboBox.DataSource = repositorio.GetList(c => true);
+            ArticulocomboBox.ValueMember = "ArticuloId";
+            ArticulocomboBox.DisplayMember = "Descripcion";
+        }
+
         private void Eliminarbutton_Click(object sender, EventArgs e)
         {
             errorProvider.Clear();
@@ -110,7 +119,6 @@ namespace SegundoParcial.UI.Registros
         }
         private bool Validar(int validar)
         {
-
             bool paso = false;
             if (validar == 1 && EntradaIdnumericUpDown.Value == 0)
             {

@@ -16,6 +16,7 @@ namespace SegundoParcial.DAL
         public DbSet<Articulo> Articulos { get; set; }
         public DbSet<EntradaArticulo> EntradaArticulos { get; set; }
 
+        public DbSet<MantenimientoDetalle> MantenimientoDetalles { get; set; }
         public Contexto() : base("ConStr") { }
             
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

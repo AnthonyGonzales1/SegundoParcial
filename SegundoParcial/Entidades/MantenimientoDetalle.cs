@@ -22,12 +22,18 @@ namespace SegundoParcial.Entidades
       
         [ForeignKey("ArticuloId")]
         public virtual Articulo Articulos { get; set; }
+        [ForeignKey("VehiculoId")]
+        public virtual Vehiculo Vehiculos{ get; set; }
+        [ForeignKey("TallerId")]
+        public virtual Taller Taller { get; set; }
+
 
         public MantenimientoDetalle()
         {
             this.Id = 0;
             this.MantenimientoId = 0;
             this.VehiculoId = 0;
+            this.ArticuloId = 0;
             this.TallerId = 0;
             this.Articulo = string.Empty;
             this.Cantidad = 0;

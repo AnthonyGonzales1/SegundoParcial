@@ -14,10 +14,11 @@ namespace SegundoParcial.UI.Registros
 {
     public partial class RegistroDetalle : Form
     {
-        Decimal ITBIS = 0;
         Decimal Importe = 0;
-        Decimal Total = 0;
         Decimal Subtotal = 0;
+        Decimal ITBIS = 0;
+        Decimal Total = 0;
+        
         public RegistroDetalle()
         {
             InitializeComponent();
@@ -116,13 +117,10 @@ namespace SegundoParcial.UI.Registros
 
             foreach (var item in BLL.ArticulosBLL.GetList(x => x.Inventario < CantidadnumericUpDown.Value))
             {
-
                 MessageBox.Show("No Existe ", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
-
+            
             if (string.IsNullOrEmpty(ImportetextBox.Text))
             {
                 MessageBox.Show("Importe esta vacio , Llene cantidad", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -148,8 +146,7 @@ namespace SegundoParcial.UI.Registros
 
                 Columnas();
             }
-
-
+            
             Importe += BLL.MantenimientoBLL.CalcularImporte(Convert.ToDecimal(PreciotextBox.Text), Convert.ToInt32(CantidadnumericUpDown.Value));
 
             if (MantenimientoIdnumericUpDown.Value != 0)
@@ -162,11 +159,11 @@ namespace SegundoParcial.UI.Registros
                 Subtotal = Importe;
                 SubTotaltextBox.Text = Subtotal.ToString();
             }
-            ITBIS = BLL.MantenimientoBLL.CalcularItbis(Convert.ToDecimal(SubTotaltextBox.Text));
-            ITBIStextBox.Text = ITBIS.ToString();
-            Total = BLL.MantenimientoBLL.Total(Convert.ToDecimal(SubTotaltextBox.Text), Convert.ToDecimal(ITBIStextBox.Text));
+                ITBIS = BLL.MantenimientoBLL.CalcularItbis(Convert.ToDecimal(SubTotaltextBox.Text));
+                ITBIStextBox.Text = ITBIS.ToString();
+                Total = BLL.MantenimientoBLL.Total(Convert.ToDecimal(SubTotaltextBox.Text), Convert.ToDecimal(ITBIStextBox.Text));
 
-            TotaltextBox.Text = Total.ToString();
+                TotaltextBox.Text = Total.ToString();
             
         }
 
@@ -174,7 +171,7 @@ namespace SegundoParcial.UI.Registros
         {
             Repositorio<Vehiculo> vehiculo = new Repositorio<Vehiculo>(new Contexto());
             VehiculocomboBox.DataSource = vehiculo.GetList(c => true);
-            VehiculocomboBox.ValueMember = "VehiculosId";
+            VehiculocomboBox.ValueMember = "VehiculoId";
             VehiculocomboBox.DisplayMember = "Descripcion";
 
             Repositorio<Taller> taller = new Repositorio<Taller>(new Contexto());
@@ -184,7 +181,7 @@ namespace SegundoParcial.UI.Registros
 
             Repositorio<Articulo> Entrada = new Repositorio<Articulo>(new Contexto());
             ArticulocomboBox.DataSource = Entrada.GetList(c => true);
-            ArticulocomboBox.ValueMember = "ArticulosId";
+            ArticulocomboBox.ValueMember = "ArticuloId";
             ArticulocomboBox.DisplayMember = "Descripcion";
         }
 
@@ -245,7 +242,7 @@ namespace SegundoParcial.UI.Registros
             if (DetalledataGridView.RowCount == 0)
             {
                 errorProvider.SetError(DetalledataGridView,
-                    "Es obligatorio seleccionar las ciudades visitadas");
+                    "Es obligatorio seleccionar ");
                 Error = true;
             }
 
@@ -256,6 +253,7 @@ namespace SegundoParcial.UI.Registros
         {
             MantenimientoIdnumericUpDown.Value = mantenimiento.MantenimientoId;
             FechadateTimePicker.Value = mantenimiento.Fecha;
+            ProxFechadateTimePicker.Value = mantenimiento.ProxFecha;
             SubTotaltextBox.Text = mantenimiento.Subtotal.ToString();
             ITBIStextBox.Text = mantenimiento.ITBIS.ToString();
             TotaltextBox.Text = mantenimiento.Total.ToString();
@@ -326,6 +324,19 @@ namespace SegundoParcial.UI.Registros
             int retorno = 0;
             int.TryParse(valor.ToString(), out retorno);
             return retorno;
+        }
+        private void FechadateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+
+
+            ProxFechadateTimePicker.Value = FechadateTimePicker.Value;
+
+
+            DateTime fecha = Convert.ToDateTime(ProxFechadateTimePicker.Text);
+            fecha = fecha.AddDays(90);
+
+            ProxFechadateTimePicker.Text = fecha.ToString();
+
         }
     }
 }

@@ -131,32 +131,7 @@ namespace SegundoParcial.BLL
             }
             return articulo;
         }
-
-        public static decimal Costo(decimal Ganancia, decimal Precio)
-        {
-            Ganancia /= 100;
-
-            return Convert.ToDecimal(Precio) * Convert.ToDecimal(Ganancia);
-            
-        }
-
-        public static decimal CalcularGanancia(decimal Costo, decimal Precio)
-        {
-            Precio -= Costo;
-
-            return (Convert.ToDecimal(Precio) / Convert.ToDecimal(Costo)) * 100;
-            
-        }
-
-        public static decimal CalcularPrecio(decimal Costo, decimal Ganancia)
-        {
-
-            Ganancia /= 100;
-            Ganancia *= Costo;
-            return Convert.ToDecimal(Costo) + Convert.ToDecimal(Ganancia);
-            
-        }
-
+        
         public static string Return(string nombre)
         {
             string descripcion = string.Empty;
