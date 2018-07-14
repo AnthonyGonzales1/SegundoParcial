@@ -12,7 +12,7 @@ namespace SegundoParcial.Entidades
         [Key]
         public int VehiculoId { get; set; }
         public string Descripcion { get; set; }
-        public int TotalMantenimiento { get; set; }
+        public decimal TotalMantenimiento { get; set; }
 
         public Vehiculo()
         {
@@ -20,11 +20,6 @@ namespace SegundoParcial.Entidades
             Descripcion = string.Empty;
             TotalMantenimiento = 0;
         }
-
-        public override string ToString()
-        {
-            return this.Descripcion;
-        }
-
+        
     }
 }

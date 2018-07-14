@@ -39,36 +39,48 @@ namespace SegundoParcial.UI.Registros
 
             }
             else
+            {
                 MessageBox.Show("No se encontro", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+            }
+            errorProvider.Clear();
         }
 
         private void Guardarbutton_Click(object sender, EventArgs e)
         {
-            
             bool paso = false;
+            Vehiculo vehiculo = LlenarClase();
             if (Validar(2))
             {
-
-                MessageBox.Show("Llenar todos los campos marcados");
-                return;
+                MessageBox.Show("Favor de Llenar las Casillas");
             }
-
-            errorProvider.Clear();
-
-            //Determinar si es Guardar o Modificar
-            if (VehiculoIdnumericUpDown.Value == 0)
-                paso = BLL.VehiculoBLL.Guardar(LlenarClase());
             else
-                paso = BLL.VehiculoBLL.Modificar(LlenarClase());
+            {
+                int id = Convert.ToInt32(VehiculoIdnumericUpDown.Value);
+                if (id == 0)
+                {
+                    paso = BLL.VehiculoBLL.Guardar(vehiculo);
+                }
+                else
+                {
+                    var C = BLL.VehiculoBLL.Buscar(id);
 
-            //Informar el resultado
-            if (paso)
+                    if (C != null)
+                    {
+                        paso = BLL.VehiculoBLL.Modificar(vehiculo);
+                    }
 
-                MessageBox.Show("Guardado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-                MessageBox.Show("No se pudo guardar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
+                }
+                errorProvider.Clear();
+                if (paso)
+                {
+                    MessageBox.Show("Guardado!", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No pudo Guardar!", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
         }
 
         private void Nuevobutton_Click(object sender, EventArgs e)
@@ -77,35 +89,40 @@ namespace SegundoParcial.UI.Registros
             DescripciontextBox.Clear();
             TotalMantenimientotextBox.Clear();
 
+            errorProvider.Clear();
         }
 
         private void Eliminarbutton_Click(object sender, EventArgs e)
         {
-            errorProvider.Clear();
-
             if (Validar(1))
             {
                 MessageBox.Show("Ingrese un ID");
-                return;
             }
-
-            int id = Convert.ToInt32(VehiculoIdnumericUpDown.Value);
-
-            if (BLL.EntradaArticuloBLL.Eliminar(id))
-                MessageBox.Show("Eliminado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("No se pudo eliminar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
 
+                int id = Convert.ToInt32(VehiculoIdnumericUpDown.Value);
+
+                if (BLL.EntradaArticuloBLL.Eliminar(id))
+                {
+                    MessageBox.Show("Eliminado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo eliminar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                errorProvider.Clear();
+            }
         }
         private Vehiculo LlenarClase()
         {
-            Vehiculo veh = new Vehiculo();
+            Vehiculo vehiculo = new Vehiculo();
+            TotalMantenimientotextBox.Text = 0.ToString();
+            vehiculo.VehiculoId = Convert.ToInt32(VehiculoIdnumericUpDown.Value);
+            vehiculo.Descripcion = DescripciontextBox.Text;
+            vehiculo.TotalMantenimiento = Convert.ToDecimal(TotalMantenimientotextBox.Text);
 
-            veh.VehiculoId = Convert.ToInt32(VehiculoIdnumericUpDown.Value);
-            veh.Descripcion = DescripciontextBox.Text;
-            veh.TotalMantenimiento = 0;
-
-            return veh;
+            return vehiculo;
         }
         private bool Validar(int validar)
         {
@@ -119,7 +136,6 @@ namespace SegundoParcial.UI.Registros
             }
             if (validar == 2 && DescripciontextBox.Text == string.Empty)
             {
-
                 errorProvider.SetError(DescripciontextBox, "Debe ingresar una Descripcion");
                 paso = true;
             }

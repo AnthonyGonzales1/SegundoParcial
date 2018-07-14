@@ -1,2 +1,4 @@
 Create DataBase SegundoParcialDb
 Go
+use SegundoParcialDb
+go

@@ -43,12 +43,11 @@
             this.InventariotextBox = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.ArticuloIdnumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.CostonumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.GananciatextBox = new System.Windows.Forms.TextBox();
             this.PreciotextBox = new System.Windows.Forms.TextBox();
+            this.CostotextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ArticuloIdnumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CostonumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // Nuevobutton
@@ -171,19 +170,6 @@
             this.ArticuloIdnumericUpDown.Size = new System.Drawing.Size(114, 20);
             this.ArticuloIdnumericUpDown.TabIndex = 16;
             // 
-            // CostonumericUpDown
-            // 
-            this.CostonumericUpDown.Location = new System.Drawing.Point(52, 116);
-            this.CostonumericUpDown.Maximum = new decimal(new int[] {
-            9000000,
-            0,
-            0,
-            0});
-            this.CostonumericUpDown.Name = "CostonumericUpDown";
-            this.CostonumericUpDown.Size = new System.Drawing.Size(114, 20);
-            this.CostonumericUpDown.TabIndex = 17;
-            this.CostonumericUpDown.ValueChanged += new System.EventHandler(this.CostonumericUpDown_ValueChanged);
-            // 
             // GananciatextBox
             // 
             this.GananciatextBox.Location = new System.Drawing.Point(235, 116);
@@ -200,14 +186,21 @@
             this.PreciotextBox.TabIndex = 18;
             this.PreciotextBox.TextChanged += new System.EventHandler(this.PreciotextBox_TextChanged);
             // 
+            // CostotextBox
+            // 
+            this.CostotextBox.Location = new System.Drawing.Point(52, 115);
+            this.CostotextBox.Name = "CostotextBox";
+            this.CostotextBox.Size = new System.Drawing.Size(114, 20);
+            this.CostotextBox.TabIndex = 20;
+            // 
             // RegistroArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(354, 272);
+            this.Controls.Add(this.CostotextBox);
             this.Controls.Add(this.GananciatextBox);
             this.Controls.Add(this.PreciotextBox);
-            this.Controls.Add(this.CostonumericUpDown);
             this.Controls.Add(this.ArticuloIdnumericUpDown);
             this.Controls.Add(this.InventariotextBox);
             this.Controls.Add(this.DescripciontextBox);
@@ -223,9 +216,9 @@
             this.Controls.Add(this.Nuevobutton);
             this.Name = "RegistroArticulo";
             this.Text = "Registro de Articulos";
+            //this.Load += new System.EventHandler(this.RegistroArticulo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ArticuloIdnumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CostonumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,8 +240,8 @@
         private System.Windows.Forms.TextBox InventariotextBox;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.NumericUpDown ArticuloIdnumericUpDown;
-        private System.Windows.Forms.NumericUpDown CostonumericUpDown;
         private System.Windows.Forms.TextBox GananciatextBox;
         private System.Windows.Forms.TextBox PreciotextBox;
+        private System.Windows.Forms.TextBox CostotextBox;
     }
 }

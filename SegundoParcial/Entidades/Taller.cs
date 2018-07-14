@@ -12,17 +12,16 @@ namespace SegundoParcial.Entidades
         public int TallerId { get; set; }
         public string Nombre { get; set; }
 
-        public Taller()
-        {
-            TallerId = 0;
-            Nombre = string.Empty;
-        }
-
         public Taller(int tallerId, string nombre)
         {
             TallerId = tallerId;
             Nombre = nombre;
-           
+
+        }
+        public Taller()
+        {
+            TallerId = 0;
+            Nombre = string.Empty;
         }
     }
 }

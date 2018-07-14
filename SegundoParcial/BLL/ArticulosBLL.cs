@@ -20,16 +20,14 @@ namespace SegundoParcial.BLL
         public static bool Guardar(Articulo articulo)
         {
             bool paso = false;
-            //Creamos una instancia del contexto para poder conectar con la BD
-            Contexto contexto = new Contexto();
+
             try
             {
-                if (contexto.Articulos.Add(articulo) != null)
-                {
-                    contexto.SaveChanges();//Guardar los cambios
-                    paso = true;
-                }
-                contexto.Dispose();//siempre hay que cerrar la conexion
+                Contexto contexto = new Contexto();
+                contexto.Articulos.Add(articulo);
+                contexto.SaveChanges();
+
+                paso = true;
             }
             catch (Exception)
             {
@@ -45,15 +43,13 @@ namespace SegundoParcial.BLL
         public static bool Modificar(Articulo articulo)
         {
             bool paso = false;
-            Contexto contexto = new Contexto();
             try
             {
-                contexto.Entry(articulo).State = EntityState.Modified;
-                if (contexto.SaveChanges() > 0)
-                {
-                    paso = true;
-                }
-                contexto.Dispose();
+                Contexto contexto = new Contexto();
+                contexto.Entry(articulo).State = System.Data.Entity.EntityState.Modified;
+                contexto.SaveChanges();
+
+                paso = true;
             }
             catch (Exception)
             {
@@ -119,11 +115,12 @@ namespace SegundoParcial.BLL
         public static List<Articulo> GetList(Expression<Func<Articulo, bool>> expression)
         {
             List<Articulo> articulo = new List<Articulo>();
-            Contexto contexto = new Contexto();
+           
             try
             {
-                articulo = contexto.Articulos.Where(expression).ToList();
-                contexto.Dispose();
+                Contexto contexto = new Contexto();
+                articulo = contexto.Articulos.ToList();
+
             }
             catch (Exception)
             {
@@ -131,7 +128,22 @@ namespace SegundoParcial.BLL
             }
             return articulo;
         }
-        
+        public static decimal Calcularganancia(decimal Costo, decimal Precio)
+        {
+            decimal Gane = Precio - Costo;
+
+            return (Convert.ToDecimal(Gane) / Convert.ToDecimal(Costo)) * 100;
+
+        }
+
+        public static decimal Calcularprecio(decimal Costo, decimal Ganancia)
+        {
+
+            Ganancia /= 100;
+            Ganancia *= Costo;
+            return Convert.ToDecimal(Costo) + Convert.ToDecimal(Ganancia);
+        }
+
         public static string Return(string nombre)
         {
             string descripcion = string.Empty;
@@ -143,6 +155,6 @@ namespace SegundoParcial.BLL
 
             return descripcion;
         }
-
+        
     }
 }

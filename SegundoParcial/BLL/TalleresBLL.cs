@@ -62,14 +62,16 @@ namespace SegundoParcial.BLL
             try
             {
                 Taller taller = contexto.Tallers.Find(id);
-
-                contexto.Tallers.Remove(taller);
+                if (taller != null)
+                {
+                    contexto.Entry(taller).State = EntityState.Deleted;
+                }
 
                 if (contexto.SaveChanges() > 0)
                 {
                     paso = true;
+                    contexto.Dispose();
                 }
-                contexto.Dispose();
             }
             catch (Exception)
             {
@@ -101,11 +103,11 @@ namespace SegundoParcial.BLL
         public static List<Taller> GetList(Expression<Func<Taller, bool>> expression)
         {
             List<Taller> taller = new List<Taller>();
-            Contexto contexto = new Contexto();
             try
             {
+                Contexto contexto = new Contexto();
                 taller = contexto.Tallers.Where(expression).ToList();
-                contexto.Dispose();
+
             }
             catch (Exception)
             {

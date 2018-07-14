@@ -11,12 +11,12 @@ namespace SegundoParcial.Entidades
         [Key]
         public int ArticuloId { get; set; }
         public string Descripcion { get; set; }
-        public Decimal Costo { get; set; }
-        public Decimal Precio { get; set; }
-        public Decimal Ganancia { get; set; }
+        public decimal Costo { get; set; }
+        public decimal Precio { get; set; }
+        public decimal Ganancia { get; set; }
         public int Inventario { get; set; }
 
-        public Articulo(int articulosId, string descripcion, Decimal costo, Decimal precio, Decimal ganancia, int inventario)
+        public Articulo(int articulosId, string descripcion, decimal costo, decimal precio, decimal ganancia, int inventario)
         {
             ArticuloId = articulosId;
             Descripcion = descripcion;
@@ -35,6 +35,10 @@ namespace SegundoParcial.Entidades
             this.Precio = 0;
             this.Ganancia = 0;
             Inventario = 0;
+        }
+        public override string ToString()
+        {
+            return this.Descripcion;
         }
     }
 }

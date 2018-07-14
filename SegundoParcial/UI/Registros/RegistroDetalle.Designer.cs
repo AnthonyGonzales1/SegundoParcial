@@ -195,6 +195,7 @@
             this.FechadateTimePicker.Name = "FechadateTimePicker";
             this.FechadateTimePicker.Size = new System.Drawing.Size(105, 20);
             this.FechadateTimePicker.TabIndex = 21;
+            this.FechadateTimePicker.ValueChanged += new System.EventHandler(this.FechadateTimePicker_ValueChanged_1);
             // 
             // label10
             // 
@@ -221,6 +222,8 @@
             // 
             // DetalledataGridView
             // 
+            this.DetalledataGridView.AllowUserToAddRows = false;
+            this.DetalledataGridView.AllowUserToDeleteRows = false;
             this.DetalledataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DetalledataGridView.Location = new System.Drawing.Point(12, 245);
             this.DetalledataGridView.Name = "DetalledataGridView";
@@ -314,6 +317,7 @@
             this.MantenimientoIdnumericUpDown.Name = "MantenimientoIdnumericUpDown";
             this.MantenimientoIdnumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.MantenimientoIdnumericUpDown.TabIndex = 36;
+            this.MantenimientoIdnumericUpDown.ValueChanged += new System.EventHandler(this.MantenimientoIdnumericUpDown_ValueChanged);
             // 
             // TallercomboBox
             // 
@@ -330,6 +334,7 @@
             this.ArticulocomboBox.Name = "ArticulocomboBox";
             this.ArticulocomboBox.Size = new System.Drawing.Size(110, 21);
             this.ArticulocomboBox.TabIndex = 38;
+            this.ArticulocomboBox.SelectedIndexChanged += new System.EventHandler(this.ArticulocomboBox_SelectedIndexChanged);
             // 
             // CantidadnumericUpDown
             // 
@@ -376,6 +381,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RegistroDetalle";
             this.Text = "RegistroDetalle";
+            this.Load += new System.EventHandler(this.RegistroDetalle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DetalledataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MantenimientoIdnumericUpDown)).EndInit();

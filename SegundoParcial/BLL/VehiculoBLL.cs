@@ -73,17 +73,21 @@ namespace SegundoParcial.BLL
         {
             bool paso = false;
             Contexto contexto = new Contexto();
+
             try
             {
                 Vehiculo vehiculo = contexto.Vehiculos.Find(id);
 
-                contexto.Vehiculos.Remove(vehiculo);
+                if (vehiculo != null)
+                {
+                    contexto.Entry(vehiculo).State = EntityState.Deleted;
+                }
 
                 if (contexto.SaveChanges() > 0)
                 {
                     paso = true;
+                    contexto.Dispose();
                 }
-                contexto.Dispose();
             }
             catch (Exception)
             {
@@ -121,11 +125,11 @@ namespace SegundoParcial.BLL
         public static List<Vehiculo> GetList(Expression<Func<Vehiculo, bool>> expression)
         {
             List<Vehiculo> vehiculo = new List<Vehiculo>();
-            Contexto contexto = new Contexto();
             try
             {
+                Contexto contexto = new Contexto();
                 vehiculo = contexto.Vehiculos.Where(expression).ToList();
-                contexto.Dispose();
+
             }
             catch (Exception)
             {

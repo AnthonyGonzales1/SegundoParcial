@@ -37,40 +37,52 @@ namespace SegundoParcial.UI.Registros
             if (articulo != null)
             {
                 DescripciontextBox.Text = articulo.Descripcion;
-                CostonumericUpDown.Text = articulo.Costo.ToString();
+                CostotextBox.Text = articulo.Costo.ToString();
                 GananciatextBox.Text = articulo.Ganancia.ToString();
                 PreciotextBox.Text = articulo.Precio.ToString();
                 InventariotextBox.Text = articulo.Inventario.ToString();
             }
             else
-                MessageBox.Show("No se encontro", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se encontro", "Fallo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void Guardarbutton_Click(object sender, EventArgs e)
         {
             bool paso = false;
+            Articulo articulo = LlenarClase();
+
+
             if (Validar(2))
             {
-
-                MessageBox.Show("Llenar todos los campos marcados");
-                return;
+                MessageBox.Show("Favor de Llenar las Casillas");
             }
-
-            errorProvider.Clear();
-
-            //Determinar si es Guardar o Modificar
-            if (ArticuloIdnumericUpDown.Value == 0)
-                paso = BLL.ArticulosBLL.Guardar(LlenarClase());
             else
-                paso = BLL.ArticulosBLL.Modificar(LlenarClase());
+            {
+                if (ArticuloIdnumericUpDown.Value == 0)
+                {
+                    paso = BLL.ArticulosBLL.Guardar(articulo);
+                }
+                else
+                {
+                    var articulos = BLL.ArticulosBLL.Buscar(Convert.ToInt32(ArticuloIdnumericUpDown.Value));
 
-            //Informar el resultado
-            if (paso)
+                    if (articulo != null)
+                    {
+                        paso = BLL.ArticulosBLL.Modificar(articulo);
+                    }
+                }
+                errorProvider.Clear();
+                if (paso)
+                {
+                    MessageBox.Show("Guardado!", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No pudo Guardar!", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-                MessageBox.Show("Guardado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-                MessageBox.Show("No se pudo guardar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
+            }
         }
 
         private void Nuevobutton_Click(object sender, EventArgs e)
@@ -78,9 +90,11 @@ namespace SegundoParcial.UI.Registros
             ArticuloIdnumericUpDown.Value = 0;
             DescripciontextBox.Clear();
             PreciotextBox.Clear();
-            CostonumericUpDown.Value = 0;
+            CostotextBox.Clear();
             GananciatextBox.Clear();
             InventariotextBox.Clear();
+
+            errorProvider.Clear();
         }
 
         private void Eliminarbutton_Click(object sender, EventArgs e)
@@ -101,25 +115,18 @@ namespace SegundoParcial.UI.Registros
                 MessageBox.Show("No se pudo eliminar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
-
-        private decimal Ganancia(decimal c, decimal p)
-        {
-            decimal r = p - c;
-            r = r / c;
-            r = r * 100;
-            return r;
-        }
-
+        
         private Articulo LlenarClase()
         {
             Articulo art = new Articulo();
-
+            InventariotextBox.Text = 0.ToString();
             art.ArticuloId = Convert.ToInt32(ArticuloIdnumericUpDown.Value);
             art.Descripcion = DescripciontextBox.Text;
             art.Precio = Convert.ToInt32(PreciotextBox.Text);
-            art.Costo = Convert.ToInt32(CostonumericUpDown.Text);
+            art.Costo = Convert.ToInt32(CostotextBox.Text);
             art.Inventario = Convert.ToInt32(InventariotextBox.Text);
             art.Ganancia = Convert.ToDecimal(GananciatextBox.Text);
+
             return art;
         }
 
@@ -141,37 +148,70 @@ namespace SegundoParcial.UI.Registros
                 errorProvider.SetError(PreciotextBox, "Ingrese un precio");
                 paso = true;
             }
-            if (validar == 2 && CostonumericUpDown.Text == string.Empty)
+            if (validar == 2 && CostotextBox.Text == string.Empty)
             {
-                errorProvider.SetError(CostonumericUpDown, "Ingrese el Costo");
+                errorProvider.SetError(CostotextBox, "Ingrese el Costo");
+                paso = true;
             }
             if (validar == 2 && InventariotextBox.Text == string.Empty)
             {
                 errorProvider.SetError(InventariotextBox, "Ingrese el Inventario");
+                paso = true;
             }
             if (validar == 2 && GananciatextBox.Text == string.Empty)
             {
                 errorProvider.SetError(GananciatextBox, "Ingrese el Inventario");
+                paso = true;
             }
             return paso;
         }
-        
-        private void CostonumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void costoTextBox_TextChanged(object sender, EventArgs e)
         {
-            
+
+
+            if (PreciotextBox.Text != string.Empty && CostotextBox.Text != string.Empty && Convert.ToDecimal(CostotextBox.Text) < Convert.ToDecimal(PreciotextBox.Text))
+            {
+                GananciatextBox.Text = BLL.ArticulosBLL.Calcularganancia(Convert.ToDecimal(CostotextBox.Text), Convert.ToDecimal(PreciotextBox.Text)).ToString();
+                return;
+            }
+
+
+
+            if (GananciatextBox.Text != string.Empty && CostotextBox.Text != string.Empty)
+            {
+                PreciotextBox.Text = BLL.ArticulosBLL.Calcularprecio(Convert.ToDecimal(CostotextBox.Text), Convert.ToDecimal(GananciatextBox.Text)).ToString();
+                return;
+            }
+
+
         }
 
-        private void PrecionumericUpDown_ValueChanged_1(object sender, EventArgs e)
+        private void precioTextBox_TextChanged(object sender, EventArgs e)
         {
+
+
+
+
+            if (PreciotextBox.Text != string.Empty && CostotextBox.Text != string.Empty && Convert.ToDecimal(CostotextBox.Text) < Convert.ToDecimal(PreciotextBox.Text))
+            {
+                GananciatextBox.Text = BLL.ArticulosBLL.Calcularganancia(Convert.ToDecimal(CostotextBox.Text), Convert.ToDecimal(PreciotextBox.Text)).ToString();
+                return;
+            }
+
+
         }
 
-        private void GanancianumericUpDown_ValueChanged_1(object sender, EventArgs e)
+        private void gananciaTextBox_TextChanged(object sender, EventArgs e)
         {
+
+            if (GananciatextBox.Text != string.Empty && CostotextBox.Text != string.Empty)
+            {
+                PreciotextBox.Text = BLL.ArticulosBLL.Calcularprecio(Convert.ToDecimal(CostotextBox.Text), Convert.ToDecimal(GananciatextBox.Text)).ToString();
+                return;
+            }
+
+
         }
 
-        private void PreciotextBox_TextChanged(object sender, EventArgs e)
-        {
-            GananciatextBox.Text = Ganancia(CostonumericUpDown.Value, Convert.ToDecimal(PreciotextBox.Text)).ToString();
-        }
     }
 }

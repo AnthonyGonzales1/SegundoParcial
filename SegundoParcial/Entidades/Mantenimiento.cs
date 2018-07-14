@@ -11,11 +11,12 @@ namespace SegundoParcial.Entidades
     {
         [Key]
         public int MantenimientoId { get; set; }
+        public int VehiculoId { get; set; }
         public DateTime Fecha { get; set; }
         public DateTime ProxFecha { get; set; }
-        public Decimal Subtotal { get; set; }
-        public Decimal ITBIS { get; set; }
-        public Decimal Total { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal ITBIS { get; set; }
+        public decimal Total { get; set; }
 
         public virtual ICollection<MantenimientoDetalle> Detalle { get; set; }
 
@@ -23,16 +24,14 @@ namespace SegundoParcial.Entidades
         {
             MantenimientoId = 0;
             Fecha = DateTime.Now;
+            ProxFecha = DateTime.Now;
             Subtotal = 0;
             ITBIS = 0;
             Total = 0;
             Detalle = new List<MantenimientoDetalle>();
 
         }
-        public void AgregarDetalle(int id,
-                                    int mantenimientoId, int vehiculoId,
-                                    int tallerId, int articuloId, string articulo, int cantidad,
-                                    Decimal precio, Decimal importe)
+        public void AgregarDetalle(int id,int mantenimientoId, int tallerId, int articuloId, string articulo, int cantidad,decimal precio, decimal importe)
         {
             this.Detalle.Add(new MantenimientoDetalle(id, mantenimientoId, vehiculoId, tallerId, articuloId, articulo, cantidad, precio, importe));
         }

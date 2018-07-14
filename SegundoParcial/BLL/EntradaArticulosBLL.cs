@@ -25,11 +25,8 @@ namespace SegundoParcial.BLL
 
             try
             {
-
                 if (contexto.EntradaArticulos.Add(entradaArticulo) != null)
                 {
-
-
                     foreach (var item in articulo.GetList(x => x.Descripcion == entradaArticulo.Articulo))
                     {
                         contexto.Articulos.Find(item.ArticuloId).Inventario += entradaArticulo.Cantidad;
@@ -57,6 +54,15 @@ namespace SegundoParcial.BLL
             Contexto contexto = new Contexto();
             try
             {
+                EntradaArticulo EntradaAnterior = BLL.EntradaArticuloBLL.Buscar(entradaArticulo.EntradaId);
+
+                int diferencia;
+
+                diferencia = entradaArticulo.Cantidad - EntradaAnterior.Cantidad;
+
+                Articulo articulo = BLL.ArticulosBLL.Buscar(EntradaArticulos.ArticuloId);
+                articulo.Inventario += diferencia;
+                BLL.ArticulosBLL.Modificar(articulo);
                 contexto.Entry(entradaArticulo).State = EntityState.Modified;
                 if (contexto.SaveChanges() > 0)
                 {
@@ -140,7 +146,6 @@ namespace SegundoParcial.BLL
             }
             return entradaArticulo;
         }
-
     }
 }
 

@@ -19,21 +19,18 @@ namespace SegundoParcial.BLL
             Contexto contexto = new Contexto();
             try
             {
-                if (contexto.Mantenimientos.Add(mantenimiento) != null)
+                contexto.Mantenimientos.Add(mantenimiento);
+                foreach (MantenimientoDetalle detalle in mantenimiento.Detalle)
                 {
-
-                    foreach (var item in mantenimiento.Detalle)
-                    {
-                        contexto.Articulos.Find(item.ArticuloId).Inventario -= item.Cantidad;
-                    }
-
-
-                    contexto.Vehiculos.Find(mantenimiento.Detalle).TotalMantenimiento += Convert.ToInt32(mantenimiento.Total);
-
-                    contexto.SaveChanges();
-                    paso = true;
+                    contexto.MantenimientoDetalles.Add(detalle);
+                    Articulo articulo = ArticulosBLL.Buscar(detalle.ArticuloId);
+                    articulo.Inventario += detalle.Cantidad;
+                    ArticulosBLL.Modificar(articulo);
                 }
+
+                contexto.SaveChanges();
                 contexto.Dispose();
+                paso = true;
             }
             catch (Exception)
             {
@@ -45,46 +42,66 @@ namespace SegundoParcial.BLL
 
         public static bool Modificar(Mantenimiento mantenimiento)
         {
-
             bool paso = false;
-
             Contexto contexto = new Contexto();
-
             try
             {
-                foreach (var item in mantenimiento.Detalle)
+                var Mantenimiento = BLL.MantenimientoBLL.Buscar(mantenimiento.MantenimientoId);
+                if (Mantenimiento != null)
                 {
-                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
-                    contexto.Entry(item).State = estado;
-                }
-                contexto.Entry(mantenimiento).State = EntityState.Modified;
+                    foreach (var item in Mantenimiento.Detalle)
+                    {
+                        contexto.Articulos.Find(item.ArticuloId).Inventario += item.Cantidad;
+                        if (!mantenimiento.Detalle.ToList().Exists(v => v.Id == item.Id))
+                        {
+                            //  contexto.registrodeArticulos.Find(item.ArticulosId).Inventario -= item.Cantidad;
 
-                if (contexto.SaveChanges() > 0)
+                            item.Articulos = null;
+                            contexto.Entry(item).State = EntityState.Deleted;
+                        }
+                    }
+                    foreach (var item in mantenimiento.Detalle)
+                    {
+                        contexto.Articulos.Find(item.ArticuloId).Inventario -= item.Cantidad;
+                        var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
+                        contexto.Entry(item).State = estado;
+                    }
+
+                    Mantenimiento EntradaAnterior = BLL.MantenimientoBLL.Buscar(Mantenimiento.MantenimientoId);
+                    
+                    decimal diferencia;
+
+                    diferencia = mantenimiento.Total - EntradaAnterior.Total;
+                    
+                    Vehiculo vehiculo = BLL.VehiculoBLL.Buscar(mantenimiento.VehiculoId);
+                    vehiculo.TotalMantenimiento += diferencia;
+                    BLL.VehiculoBLL.Editar(vehiculo);
+
+                    contexto.Entry(Mantenimiento).State = EntityState.Modified;
+                }
+            if (contexto.SaveChanges() > 0)
                 {
                     paso = true;
                 }
                 contexto.Dispose();
             }
+
             catch (Exception)
             {
                 throw;
             }
-
+            
             return paso;
         }
 
         public static bool Eliminar(int id)
         {
-
             bool paso = false;
-
             Contexto contexto = new Contexto();
 
             try
             {
                 Mantenimiento mantenimiento = contexto.Mantenimientos.Find(id);
-
-
                 if (mantenimiento != null)
                 {
                     foreach (var item in mantenimiento.Detalle)
@@ -92,23 +109,18 @@ namespace SegundoParcial.BLL
                         contexto.Articulos.Find(item.ArticuloId).Inventario += item.Cantidad;
 
                     }
-
-                    contexto.Vehiculos.Find(mantenimiento.Detalle).TotalMantenimiento -= Convert.ToInt32(mantenimiento.Total);
+                    contexto.Vehiculos.Find(mantenimiento.VehiculoId).TotalMantenimiento -= mantenimiento.Total;
 
                     mantenimiento.Detalle.Count();
-                    contexto.Mantenimientos.Remove(mantenimiento);
-                    
+                    contexto.Mantenimientos.Remove(mantenimiento);   
                 }
                 if (contexto.SaveChanges() > 0)
                 {
 
                     paso = true;
-
                 }
-
                 contexto.Dispose();
             }
-
             catch (Exception)
             {
                 throw;
@@ -119,40 +131,39 @@ namespace SegundoParcial.BLL
 
         public static Mantenimiento Buscar(int id)
         {
-
             Mantenimiento mantenimiento = new Mantenimiento();
             Contexto contexto = new Contexto();
 
             try
             {
                 mantenimiento = contexto.Mantenimientos.Find(id);
-                mantenimiento.Detalle.Count();
-
-                foreach (var item in mantenimiento.Detalle)
+                if (mantenimiento != null)
                 {
-                    //string s = item.;
+                    mantenimiento.Detalle.Count();
+
+                    foreach (var item in mantenimiento.Detalle)
+                    {
+
+                        string art = item.Articulos.Descripcion;
+                    }
+
                 }
                 contexto.Dispose();
-            }
-
             catch (Exception)
             {
                 throw;
             }
-
             return mantenimiento;
         }
 
         public static List<Mantenimiento> GetList(Expression<Func<Mantenimiento, bool>> expression)
         {
-
             List<Mantenimiento> Mantenimientos = new List<Mantenimiento>();
-            Contexto contexto = new Contexto();
-
             try
             {
+                Contexto contexto = new Contexto();
                 Mantenimientos = contexto.Mantenimientos.Where(expression).ToList();
-                contexto.Dispose();
+                
             }
             catch (Exception)
             {
