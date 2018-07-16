@@ -21,17 +21,14 @@ namespace SegundoParcial.BLL
             
             //Creamos una instancia del contexto para poder conectar con la BD
             Contexto contexto = new Contexto();
-            Repositorio<Articulo> articulo = new Repositorio<Articulo>(new Contexto());
-
+            
             try
             {
                 if (contexto.EntradaArticulos.Add(entradaArticulo) != null)
                 {
-                    foreach (var item in articulo.GetList(x => x.Descripcion == entradaArticulo.ArticuloId.ToString()))
-                    {
-                        contexto.Articulos.Find(item.ArticuloId).Inventario += entradaArticulo.Cantidad;
-                    }
-
+                    Articulo articulo = BLL.ArticulosBLL.Buscar(entradaArticulo.ArticuloId);
+                    articulo.Inventario += entradaArticulo.Cantidad;
+                    BLL.ArticulosBLL.Modificar(articulo);
                     contexto.SaveChanges();
                     paso = true;
                 }

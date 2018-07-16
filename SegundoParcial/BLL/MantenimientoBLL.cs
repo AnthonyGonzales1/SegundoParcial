@@ -19,18 +19,17 @@ namespace SegundoParcial.BLL
             Contexto contexto = new Contexto();
             try
             {
-                contexto.Mantenimientos.Add(mantenimiento);
-                foreach (MantenimientoDetalle detalle in mantenimiento.Detalle)
+                if (contexto.Mantenimientos.Add(mantenimiento) != null)
                 {
-                    contexto.MantenimientoDetalles.Add(detalle);
-                    Articulo articulo = ArticulosBLL.Buscar(detalle.ArticuloId);
-                    articulo.Inventario += detalle.Cantidad;
-                    ArticulosBLL.Modificar(articulo);
-                }
+                    foreach (var item in mantenimiento.Detalle)
+                    {
+                        contexto.Articulos.Find(item.ArticuloId).Inventario -= item.Cantidad;
+                    }
+                    contexto.Vehiculos.Find(mantenimiento.VehiculoId).TotalMantenimiento += mantenimiento.Total;
 
-                contexto.SaveChanges();
-                contexto.Dispose();
-                paso = true;
+                    contexto.SaveChanges();
+                    paso = true;
+                }
             }
             catch (Exception)
             {

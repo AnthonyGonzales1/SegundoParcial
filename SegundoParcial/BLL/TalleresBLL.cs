@@ -88,7 +88,7 @@ namespace SegundoParcial.BLL
             Taller taller = new Taller();
             try
             {
-                taller = contexto.Tallers.Find(id);
+                taller = contexto.Tallers.Find();
                 contexto.Dispose();
             }
             catch (Exception)
