@@ -27,7 +27,7 @@ namespace SegundoParcial.BLL
             {
                 if (contexto.EntradaArticulos.Add(entradaArticulo) != null)
                 {
-                    foreach (var item in articulo.GetList(x => x.Descripcion == entradaArticulo.Articulo))
+                    foreach (var item in articulo.GetList(x => x.Descripcion == entradaArticulo.ArticuloId.ToString()))
                     {
                         contexto.Articulos.Find(item.ArticuloId).Inventario += entradaArticulo.Cantidad;
                     }
@@ -60,7 +60,7 @@ namespace SegundoParcial.BLL
 
                 diferencia = entradaArticulo.Cantidad - EntradaAnterior.Cantidad;
 
-                Articulo articulo = BLL.ArticulosBLL.Buscar(EntradaArticulos.ArticuloId);
+                Articulo articulo = BLL.ArticulosBLL.Buscar(entradaArticulo.ArticuloId);
                 articulo.Inventario += diferencia;
                 BLL.ArticulosBLL.Modificar(articulo);
                 contexto.Entry(entradaArticulo).State = EntityState.Modified;

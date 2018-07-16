@@ -85,7 +85,7 @@ namespace SegundoParcial.UI.Registros
                 if (MantenimientoIdnumericUpDown.Value == 0)
                 {
                     Paso = BLL.MantenimientoBLL.Guardar(mantenimiento);
-                    Error.Clear();
+                    errorProvider.Clear();
                 }
                 else
                 {
@@ -95,7 +95,7 @@ namespace SegundoParcial.UI.Registros
                     {
                         Paso = BLL.MantenimientoBLL.Modificar(mantenimiento);
                     }
-                    Error.Clear();
+                    errorProvider.Clear();
                 }
                 //Informar el resultado
                 if (Paso)
@@ -112,7 +112,7 @@ namespace SegundoParcial.UI.Registros
 
         private void Eliminarbutton_Click(object sender, EventArgs e)
         {
-            if (Error(1))
+            if (Validar(1))
             {
                 MessageBox.Show("Favor Llenar Casilla!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -376,7 +376,7 @@ namespace SegundoParcial.UI.Registros
 
         private void RegistroDetalle_Load(object sender, EventArgs e)
         {
-                DateTime fecha = Convert.ToDateTime(ProxFechadateTimePicker.Text);
+                DateTime fecha = Convert.ToDateTime(ProxFechadateTimePicker.Value);
                 fecha = fecha.AddMonths(3);
                 ProxFechadateTimePicker.Text = fecha.ToString();
             

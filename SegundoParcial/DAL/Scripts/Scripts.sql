@@ -1,4 +1,2 @@
-Create DataBase SegundoParcialDb
+Create DataBase DoParcialDb
 Go
-use SegundoParcialDb
-go

@@ -75,7 +75,7 @@ namespace SegundoParcial.BLL
                     
                     Vehiculo vehiculo = BLL.VehiculoBLL.Buscar(mantenimiento.VehiculoId);
                     vehiculo.TotalMantenimiento += diferencia;
-                    BLL.VehiculoBLL.Editar(vehiculo);
+                    BLL.VehiculoBLL.Modificar(vehiculo);
 
                     contexto.Entry(Mantenimiento).State = EntityState.Modified;
                 }
@@ -149,6 +149,7 @@ namespace SegundoParcial.BLL
 
                 }
                 contexto.Dispose();
+            }
             catch (Exception)
             {
                 throw;

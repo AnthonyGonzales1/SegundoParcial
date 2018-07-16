@@ -165,7 +165,7 @@ namespace SegundoParcial.UI.Registros
             }
             return paso;
         }
-        private void costoTextBox_TextChanged(object sender, EventArgs e)
+        private void CostotextBox_TextChanged(object sender, EventArgs e)
         {
 
 
@@ -186,12 +186,8 @@ namespace SegundoParcial.UI.Registros
 
         }
 
-        private void precioTextBox_TextChanged(object sender, EventArgs e)
+        private void PreciotextBox_TextChanged(object sender, EventArgs e)
         {
-
-
-
-
             if (PreciotextBox.Text != string.Empty && CostotextBox.Text != string.Empty && Convert.ToDecimal(CostotextBox.Text) < Convert.ToDecimal(PreciotextBox.Text))
             {
                 GananciatextBox.Text = BLL.ArticulosBLL.Calcularganancia(Convert.ToDecimal(CostotextBox.Text), Convert.ToDecimal(PreciotextBox.Text)).ToString();
@@ -201,7 +197,7 @@ namespace SegundoParcial.UI.Registros
 
         }
 
-        private void gananciaTextBox_TextChanged(object sender, EventArgs e)
+        private void GananciatextBox_TextChanged(object sender, EventArgs e)
         {
 
             if (GananciatextBox.Text != string.Empty && CostotextBox.Text != string.Empty)
@@ -209,8 +205,7 @@ namespace SegundoParcial.UI.Registros
                 PreciotextBox.Text = BLL.ArticulosBLL.Calcularprecio(Convert.ToDecimal(CostotextBox.Text), Convert.ToDecimal(GananciatextBox.Text)).ToString();
                 return;
             }
-
-
+            
         }
 
     }
