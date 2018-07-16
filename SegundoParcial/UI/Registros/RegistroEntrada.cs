@@ -63,9 +63,9 @@ namespace SegundoParcial.UI.Registros
                 }
                 else
                 {
-                    var V = BLL.EntradaArticuloBLL.Buscar(Convert.ToInt32(EntradaIdnumericUpDown.Value));
+                    var entradaArticulo = BLL.EntradaArticuloBLL.Buscar(Convert.ToInt32(EntradaIdnumericUpDown.Value));
 
-                    if (V != null)
+                    if (entradaArticulo != null)
                     {
                         paso = BLL.EntradaArticuloBLL.Modificar(EntradaArticulos);
                     }
